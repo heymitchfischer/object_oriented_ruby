@@ -22,12 +22,12 @@ end
 class Car < Vehicle
   attr_reader :fuel
 
-  def initialize
-    super
+  def initialize(input_options)
+    super()
 
-    @fuel = "gasoline"
-    @make = "Honda"
-    @model = "Accord"
+    @fuel = input_options[:fuel]
+    @make = input_options[:make]
+    @model = input_options[:model]
   end
 
   def honk_horn
@@ -36,13 +36,13 @@ class Car < Vehicle
 end
 
 class Bike < Vehicle
-  attr_reader :color
 
-  def initialize
-    super
+  def initialize(input_options)
+    super()
 
-    @color = "red"
-    @weight = "80 lbs"
+    @gear = input_options[:gear]
+    @type = input_options[:color]
+    @weight = input_options[:weight]
   end
 
   def ring_bell
@@ -50,8 +50,15 @@ class Bike < Vehicle
   end
 end
 
-car = Car.new 
-bike = Bike.new
+car = Car.new(
+              fuel: "gasoline", 
+              make: "Honda", 
+              model: "Accord"
+              )
+bike = Bike.new(gear: 10,
+                type: "off road",
+                weight: "27 lbs"
+                )
 
 car.accelerate
 bike.accelerate
@@ -60,4 +67,3 @@ car.honk_horn
 bike.ring_bell
 
 p car.fuel
-p bike.color
