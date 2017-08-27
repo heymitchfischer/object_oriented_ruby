@@ -1,4 +1,3 @@
-card_class.rb
 # 1. Write out the Card and Deck classes to make the program work. The Deck class should hold a list of Card instances.
 # 2. Change the program to use multiple choice questions. The Card class should be responsible for checking the answer.
 # 3. CHALLENGE: Change the program to allow the user to retry once if they get the wrong answer.
@@ -10,28 +9,26 @@ class Card
   attr_reader :question, :answer
 
 
-  def initialize()
-  end
-  def question
-
-  end
-  def answer
-
+  def initialize(question, answer)
+    @question = question
+    @answer = answer
   end
 end
 
 class Deck
   def initialize(trivia_data)
     @trivia_data = trivia_data
-    card_array=[]
-    @trivia_data.each_key { |key,value| card_array << {:question => key, :answer => value}}
+    @card_array=[]
+    @trivia_data.each { |key, value| @card_array << {:question => key, :answer => value}}
   end
   def remaining_cards
-    # return array length
+    return @card_array.length
   end
 
   def draw_card
-    return Card.new(card_array)
+    output = Card.new(@card_array[0][:question], @card_array[0][:answer])
+    @card_array.delete_at(0)
+    return output
   end
 end
 
@@ -53,5 +50,3 @@ while deck.remaining_cards > 0
     puts "Incorrect!"
   end
 end
-
-p trivia_data
